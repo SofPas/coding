@@ -165,6 +165,34 @@ level_2 = [
 
 level_3 = [
 "ZZZZZZZZZZZZZZZZZZZZZZZZZ",
+"ZP          ZZ          Z",
+"Z  ZZ  ZZZ  ZZZZ  ZZZZ  Z",
+"Z        Z        Z     Z",
+"Z  ZZ    ZZZZZZZ  Z  Z  Z",
+"Z   Z      Z      Z  Z  Z",
+"Z  ZZZZ  ZZZ   ZZZ  ZZ  Z",
+"Z      Z      Z         Z",
+"ZZZZZ  Z ZZZ  ZZZ  ZZ  ZZ",
+"Z   Z  Z  Z         Z   Z",
+"Z  ZZ  Z  Z  ZZZ ZZZZ   Z",
+"Z  Z          Z      Z  Z",
+"Z  ZZZZZZZZZ  Z  ZZZZZ  Z",
+"Z             Z         Z",
+"ZZZZ    ZZZZZZZ   ZZZZZZZ",
+"Z   Z   Z   Z          ZZ",
+"Z   ZZZZZ   ZZZZZ       Z",
+"Z      Z   Z  Z        ZZ",
+"Z  ZZZZZZZZZ  Z  ZZZZ  ZZ",
+"Z      Z      Z         Z",
+"Z  ZZ  Z  ZZZZZ  Z  ZZ  Z",
+"Z      Z         Z     ZZ",
+"Z  ZZZZZZZZZZZZZZZZZZ   Z",
+"Z      ZT               Z",
+"ZZZZZZZZZZZZZZZZZZZZZZZZZ"
+]
+
+level_4 = [
+"ZZZZZZZZZZZZZZZZZZZZZZZZZ",
 "Z  P     Z        Z     Z",
 "Z  ZZZZ  Z  ZZZZ  Z  Z  Z",
 "Z     Z     Z     Z  Z  Z",
@@ -191,7 +219,7 @@ level_3 = [
 "ZZZZZZZZZZZZZZZZZZZZZZZZZ"
 ]
 
-level_4 = [
+level_5 = [
 "ZZZZZZZZZZZZZZZZZZZZZZZZZ",
 "Z  P     Z     Z     Z  Z",
 "Z  ZZZZZ Z ZZZZZ ZZZ Z ZZ",
@@ -219,33 +247,7 @@ level_4 = [
 "ZZZZZZZZZZZZZZZZZZZZZZZZZ"
 ]
 
-level_5 = [
-"ZZZZZZZZZZZZZZZZZZZZZZZZZ",
-"ZP        ZZ            Z",
-"Z ZZZ ZZZ ZZZZ ZZZZZZ   Z",
-"Z     Z        Z     Z  Z",
-"Z ZZZ Z ZZZZZZ Z ZZZ Z ZZ",
-"Z   Z     Z     Z   Z   Z",
-"Z ZZZZZ ZZZ ZZZ Z ZZZ  ZZ",
-"Z     Z     Z   Z Z     Z",
-"ZZZZZ Z ZZZ ZZZZZ Z Z Z Z",
-"Z   Z Z   Z     Z Z Z   Z",
-"Z ZZZ ZZZ Z ZZZ ZZZ Z ZZZ",
-"Z Z     Z   Z Z     Z   Z",
-"Z Z ZZZZZZZ Z Z ZZZZZ ZZZ",
-"Z         Z   Z     Z   Z",
-"ZZZZ    ZZZZZZZ   ZZZZZZZ",
-"Z   Z   Z   Z  T     Z  Z",
-"Z Z Z Z Z Z Z ZZZZZ  Z ZZ",
-"Z     Z   Z Z Z      Z  Z",
-"Z  ZZZZZZZZ Z Z ZZZZZ  ZZ",
-"Z     Z     Z   Z       Z",
-"Z  ZZ Z ZZZZZZZ Z ZZZZ  Z",
-"Z     Z         Z   Z   Z",
-"Z  ZZZZZZZZZZZZZZZZZZ  ZZ",
-"Z    Z     Z            Z",
-"ZZZZZZZZZZZZZZZZZZZZZZZZZ"
-]
+level_6 = [ ]
 
 #Add the maze to the list of mazes
 levels.append(level_1)
@@ -253,6 +255,7 @@ levels.append(level_2)
 levels.append(level_3)
 levels.append(level_4)
 levels.append(level_5)
+levels.append(level_6)
 
 #Create the Level Setup Function
 def setup_maze(level):
@@ -305,18 +308,21 @@ def game_loop():
             increase_score()
 
             if not treasures:
+                # Move to next level
                 next_level()
     
     wn.ontimer(game_loop, 100)
 
-level_index = 1 
+level_index = 1
 
 def next_level():
     global level_index
     level_index += 1
     setup_maze(globals()[f"level_{level_index}"])
+    if level_index > 5:
+        wn.bye()
 
 game_loop()
 
 while True:
-    wn.update() #So that the window stays open until you close it
+    wn.update()
